@@ -7,6 +7,7 @@ A Model Context Protocol (MCP) server that provides AI-powered code context retr
 - **Semantic Code Search**: Uses OpenAI embeddings to find semantically similar code chunks
 - **Vector Database**: Stores code embeddings in Supabase for fast retrieval
 - **MCP Integration**: Follows the Model Context Protocol for seamless integration with AI tools
+- **Datadog Monitoring**: Comprehensive observability with APM tracing, custom metrics, and error tracking
 - **Two Tools**:
   - `get_code_context`: Retrieves relevant code context from the codebase
   - `augment_prompt`: Creates a complete prompt with context for LLM consumption
@@ -16,6 +17,7 @@ A Model Context Protocol (MCP) server that provides AI-powered code context retr
 - Python 3.10 or higher
 - Supabase account with vector database setup
 - OpenAI API key
+- (Optional) Datadog account for monitoring and observability
 
 ## Installation
 
@@ -40,7 +42,15 @@ pip install -r requirements.txt
 SUPABASE_URL=your_supabase_url
 SUPABASE_SERVICE_KEY=your_supabase_service_key
 OPENAI_API_KEY=your_openai_api_key
+
+# Optional: Datadog Monitoring
+DD_API_KEY=your_datadog_api_key
+DD_APP_KEY=your_datadog_app_key
+DD_SERVICE_NAME=peyote-ingest
+DD_ENV=production
 ```
+
+See [DATADOG_INTEGRATION.md](DATADOG_INTEGRATION.md) for detailed monitoring setup instructions.
 
 ## Usage
 
@@ -216,6 +226,33 @@ Retrieved Context
     ↓
 GitHub Copilot (with context)
 ```
+
+## Monitoring with Datadog
+
+The ingestion service (`ingest.py`) includes comprehensive Datadog integration for monitoring and observability:
+
+- **Custom Metrics**: Track ingestion performance, error rates, and resource usage
+- **Error Tracking**: Automatic exception capture with stack traces
+- **Structured Logging**: Centralized logging with correlation to traces
+
+### Quick Start
+
+1. Add your Datadog credentials to `.env`:
+```env
+DD_API_KEY=your_datadog_api_key
+DD_APP_KEY=your_datadog_app_key
+DD_SERVICE_NAME=peyote-ingest
+DD_ENV=production
+```
+
+2. Run the service:
+```bash
+python src/ingest.py
+```
+
+3. View metrics in Datadog dashboard
+
+For detailed setup instructions, monitoring features, and best practices, see [DATADOG_INTEGRATION.md](DATADOG_INTEGRATION.md).
 
 ## Troubleshooting
 

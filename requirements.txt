@@ -5,3 +5,4 @@ langchain
 gitpython
 mcp
 flask
+datadog
