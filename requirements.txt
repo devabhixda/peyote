@@ -1,0 +1,7 @@
+supabase
+openai
+python-dotenv
+langchain
+gitpython
+mcp
+flask
