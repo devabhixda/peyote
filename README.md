@@ -52,6 +52,44 @@ The server uses stdio for communication following the MCP protocol:
 python src/mcp_server.py
 ```
 
+### Integrating with Cursor
+
+1. Open Cursor Settings (Cmd+Shift+J or Ctrl+Shift+J)
+2. Navigate to "Cursor Settings" > "Model Context Protocol"
+3. Add a new MCP server configuration by editing the configuration file (usually at `~/.cursor/mcp_settings.json` or through the UI):
+
+```json
+{
+  "mcpServers": {
+    "peyote-code-context": {
+      "command": "python",
+      "args": ["/Users/devabhi/Projects/Peyote/Server/src/mcp_server.py"],
+      "env": {
+        "SUPABASE_URL": "your_supabase_url",
+        "SUPABASE_SERVICE_KEY": "your_supabase_service_key",
+        "OPENAI_API_KEY": "your_openai_api_key"
+      }
+    }
+  }
+}
+```
+
+Or use a `.env` file by setting the working directory:
+
+```json
+{
+  "mcpServers": {
+    "peyote-code-context": {
+      "command": "python",
+      "args": ["/Users/devabhi/Projects/Peyote/Server/src/mcp_server.py"],
+      "cwd": "/Users/devabhi/Projects/Peyote/Server"
+    }
+  }
+}
+```
+
+4. Restart Cursor to load the MCP server
+
 ### Integrating with GitHub Copilot (VS Code)
 
 1. Install the latest version of VS Code with GitHub Copilot extension
@@ -89,9 +127,19 @@ Or use a `.env` file and reference it:
 
 3. Restart VS Code to load the MCP server
 
+### Using in Cursor Chat
+
+Once configured, you can use the tools in Cursor's AI chat:
+
+```
+Use @peyote-code-context to get code context for: "def calculate_similarity(a, b):"
+```
+
+Or invoke the tools directly through the MCP interface.
+
 ### Using in GitHub Copilot Chat
 
-Once configured, you can use the tools in Copilot Chat:
+Once configured in VS Code, you can use the tools in Copilot Chat:
 
 ```
 @peyote-code-context get_code_context with code_snippet: "def calculate_similarity(a, b):"
@@ -171,6 +219,12 @@ GitHub Copilot (with context)
 
 ## Troubleshooting
 
+### Cursor-specific issues
+- If MCP server doesn't appear in Cursor, check the configuration file location (`~/.cursor/mcp_settings.json` on macOS/Linux, `%APPDATA%\Cursor\mcp_settings.json` on Windows)
+- Restart Cursor completely after making configuration changes
+- Check Cursor's developer console (Help > Toggle Developer Tools) for MCP-related errors
+- Ensure you're using a recent version of Cursor that supports MCP
+
 ### Server not connecting
 - Ensure Python path is correct in the configuration
 - Check that all environment variables are set
@@ -188,6 +242,7 @@ GitHub Copilot (with context)
 ## References
 
 - [MCP Documentation](https://modelcontextprotocol.io/docs/develop/build-server#python)
+- [Cursor MCP Integration](https://docs.cursor.com/context/context-mcp)
 - [GitHub Copilot MCP Integration](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp?tool=visualstudio)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
 
