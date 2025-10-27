@@ -50,8 +50,6 @@ DD_SERVICE_NAME=peyote-ingest
 DD_ENV=production
 ```
 
-See [DATADOG_INTEGRATION.md](DATADOG_INTEGRATION.md) for detailed monitoring setup instructions.
-
 ## Usage
 
 ### Running the MCP Server
@@ -252,8 +250,6 @@ python src/ingest.py
 
 3. View metrics in Datadog dashboard
 
-For detailed setup instructions, monitoring features, and best practices, see [DATADOG_INTEGRATION.md](DATADOG_INTEGRATION.md).
-
 ## Troubleshooting
 
 ### Cursor-specific issues
@@ -283,6 +279,3 @@ For detailed setup instructions, monitoring features, and best practices, see [D
 - [GitHub Copilot MCP Integration](https://docs.github.com/en/copilot/how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp?tool=visualstudio)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
 
-## License
-
-[Your License Here]
